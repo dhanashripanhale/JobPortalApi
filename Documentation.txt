@@ -1,0 +1,177 @@
+*********STATE*********
+
+//Show List Of State
+GET=>
+   http://localhost:8080/api/state/list
+
+
+//Store State
+POST=>
+    http://localhost:8080/api/state/store
+{
+      "state_name": "Goa",
+      "state_status": 1
+}
+
+
+//Show One State  ( view single data )
+GET=>
+    http://localhost:8080/api/state/show/1
+
+id = state_id
+
+
+//Update State
+PUT=>
+   http://localhost:8080/api/state/update
+{
+    "state_id": 20,
+    "state_name": "Maharashtra",
+    "state_status": 1,
+    "createdAt": "2024-06-20T05:50:37.000Z",
+    "updatedAt": "2024-06-20T05:50:37.000Z"
+}
+
+
+//Delete State
+DELETE =>
+        http://localhost:8080/api/state/delete/7
+id =state_id
+
+
+
+
+*********DISTRICT*********
+
+//Show List Of District
+GET=>
+   http://localhost:8080/api/district/list
+
+
+//Store District
+POST=>
+    http://localhost:8080/api/district/store
+   {
+        "district_name": "Satara",
+        "district_state": "1",
+        "district_status": 1
+      
+    }
+
+
+//Show One District  ( view single data )
+GET=>
+    http://localhost:8080/api/district/show/1
+
+id = district_id
+
+
+//Update District
+PUT=>
+   http://localhost:8080/api/district/update
+{
+    "district_id": 2,
+    "district_name": "Solapur",
+    "district_state": "1",
+    "district_status": 1,
+    "createdAt": "2024-06-18T06:34:01.000Z",
+    "updatedAt": "2024-06-18T06:34:01.000Z"
+}
+
+
+//Delete District
+DELETE =>
+        http://localhost:8080/api/district/delete/7
+id =district_id
+
+
+
+
+
+*********TALUKA*********
+
+//Show List Of Taluka
+GET=>
+   http://localhost:8080/api/taluka/list
+
+
+//Store Taluka
+POST=>
+  http://localhost:8080/api/taluka/list
+{
+      "taluka_name": "Pune",
+      "taluka_district:"1"
+      "taluka_status": 1
+}
+
+
+//Show One Taluka  ( view single data )
+GET=>
+    http://localhost:8080/api/taluka/show/1
+
+id = taluka_id
+
+
+//Update Taluka
+PUT=>
+   http://localhost:8080/api/taluka/update
+{
+    "taluka_id": 2,
+    "taluka_name": "Indapur",
+    "taluka_district": "1",
+    "taluka_status": 1,
+    "createdAt": "2024-06-18T06:45:19.000Z",
+    "updatedAt": "2024-06-18T06:45:19.000Z"
+}
+
+
+//Delete Taluka
+DELETE =>
+        http://localhost:8080/api/taluka/delete/7
+id = taluka_id
+
+
+
+
+*********VILLAGE*********
+
+//Show List Of Village
+GET=>
+  http://localhost:8080/api/village/list
+
+
+//Store Village
+POST=>
+  http://localhost:8080/api/village/list
+{
+      "village_name": "Pune",
+      "village_taluka:"1"
+      "village_status": 1
+}
+
+
+//Show One Village  ( view single data )
+GET=>
+    http://localhost:8080/api/village/show/1
+
+id = village_id
+
+
+//Update Village
+PUT=>
+   http://localhost:8080/api/village/update
+{
+    "village_id": 2,
+    "village_name": "Malegaon",
+    "village_taluka": "1",
+    "village_status": 1,
+    "createdAt": "2024-06-18T06:48:31.000Z",
+    "updatedAt": "2024-06-18T06:48:31.000Z"
+}
+
+
+//Delete Village
+DELETE =>
+        http://localhost:8080/api/village/delete/7
+id = village_id
+
