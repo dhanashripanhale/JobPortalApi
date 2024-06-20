@@ -56,13 +56,11 @@ const show = async (req, res) => {
 
 
 const updated = async (req, res) => {
+    // console.log(req.body);
     try {
-        // return console.log(req.body);
-        const { district_id, district_name, district_state, district_status } = req.body;
-        //  console.log(district_state);
+        const { district_id, district_name, state_id, district_status } = req.body;
         const district = await District.findByPk(district_id);
 
-// return console.log(district);
 
         if (!district) {
             return res.status(404).json({ error: "District not found" });
@@ -70,7 +68,7 @@ const updated = async (req, res) => {
 
         await district.update({
             district_name: district_name,
-            district_state: district_state,
+            district_state: state_id,
             district_status: district_status,
         })
         return res.json({ message: "District updated successfully!", status: 1 });
