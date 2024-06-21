@@ -26,6 +26,9 @@ expressApp.use("/api",taluka);
 const village = require("./src/Village/Route");
 expressApp.use("/api",village);
 
+const jobcategory = require("./src/JobCategory/Route")
+expressApp.use("/api",jobcategory);
+
 
 
 expressApp.listen(8080, () => {
