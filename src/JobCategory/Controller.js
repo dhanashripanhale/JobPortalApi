@@ -46,7 +46,7 @@ const show = async (req, res) => {
 const updated = async (req, res) => {
     try {
         const { jobcategory_id, jobcategory_name, jobcategory_status } = req.body;
-console.log(req.body);
+// console.log(req.body);
         const jobcategory = await JobCategory.findByPk(jobcategory_id);
         if (!jobcategory) {
             return res.status(404).json({ error: "Job Category not found" });
