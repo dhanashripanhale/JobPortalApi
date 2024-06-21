@@ -58,7 +58,7 @@ const show = async (req, res) => {
 
 const updated = async (req, res) => {
     try {
-        const { village_id, village_name,village_taluka,village_status } = req.body;
+        const { village_id, village_name,taluka_id,village_status } = req.body;
 
         const village = await Village.findByPk(village_id);
         if (!village) {
@@ -66,9 +66,9 @@ const updated = async (req, res) => {
         }
 
         await village.update({
-            village_name,
-            village_taluka,
-            village_status,
+            village_name:village_name,
+            village_taluka:taluka_id,
+            village_status:village_status,
         })
         return res.json({ message: "Village updated successfully!", status: 1 });
     } catch (error) {

@@ -56,8 +56,10 @@ const show = async (req, res) => {
 
 
 const updated = async (req, res) => {
+    // console.log(req.body);
+
     try {
-        const { taluka_id, taluka_name,taluka_district,taluka_status } = req.body;
+        const { taluka_id, taluka_name,district_id,taluka_status } = req.body;
 
         const taluka = await Taluka.findByPk(taluka_id);
         if (!taluka) {
@@ -65,9 +67,9 @@ const updated = async (req, res) => {
         }
 
         await taluka.update({
-            taluka_name,
-            taluka_district,
-            taluka_status,
+            taluka_name:taluka_name,
+            taluka_district:district_id,
+            taluka_status:taluka_name,
         })
         return res.json({ message: "Taluka updated successfully!", status: 1 });
     } catch (error) {
