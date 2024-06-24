@@ -29,6 +29,9 @@ expressApp.use("/api",village);
 const jobcategory = require("./src/JobCategory/Route")
 expressApp.use("/api",jobcategory);
 
+const job = require("./src/Job/Route");
+expressApp.use("/api",job);
+
 
 
 expressApp.listen(8080, () => {

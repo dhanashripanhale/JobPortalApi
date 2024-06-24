@@ -5,34 +5,34 @@ const Taluka = require("./Modal");
 
 const index = async (req, res) => {
     try {
-      const taluka = await sequelize.query(
-        `    SELECT * FROM tbl_talukas 
-             INNER JOIN tbl_districts
-             ON tbl_talukas.taluka_district = tbl_districts.district_id 
+        const taluka = await sequelize.query(
+            `    SELECT * FROM tbl_talukas  t
+                 LEFT JOIN tbl_districts  d ON t.taluka_district = d.district_id
+                LEFT JOIN tbl_states  s ON t.taluka_state = s.state_id;
         `,
-  
-        {
-          model: Taluka,
-          mapToModel: true,
-        }
-      );
-      res.json(taluka);
+
+            {
+                model: Taluka,
+                mapToModel: true,
+            }
+        );
+        res.json(taluka);
     } catch (error) {
-      console.error("Error getting Taluka:", error);
-      res.status(500).json({ error: "Error getting Taluka" });
+        console.error("Error getting Taluka:", error);
+        res.status(500).json({ error: "Error getting Taluka" });
     }
-  };
+};
 
 
 
-  const store = async(req,res) => {
+const store = async (req, res) => {
     try {
-       const {taluka_name,taluka_district,taluka_status}=req.body;
-    //   return console.log(taluka_name);
-      await Taluka.create({
-        taluka_name,taluka_district,taluka_status
-      });
-      return res.status(200).json({message:'Taluka added successfully...',status:1})
+        const { taluka_name, taluka_district, taluka_state, taluka_status } = req.body;
+        //   return console.log(taluka_name);
+        await Taluka.create({
+            taluka_name, taluka_district, taluka_state, taluka_status
+        });
+        return res.status(200).json({ message: 'Taluka added successfully...', status: 1 })
 
     } catch (error) {
         console.log("error....");
@@ -59,7 +59,7 @@ const updated = async (req, res) => {
     // console.log(req.body);
 
     try {
-        const { taluka_id, taluka_name,district_id,taluka_status } = req.body;
+        const { taluka_id, taluka_name, district_id, state_id, taluka_status } = req.body;
 
         const taluka = await Taluka.findByPk(taluka_id);
         if (!taluka) {
@@ -67,9 +67,11 @@ const updated = async (req, res) => {
         }
 
         await taluka.update({
-            taluka_name:taluka_name,
-            taluka_district:district_id,
-            taluka_status:taluka_name,
+            taluka_name: taluka_name,
+            taluka_district: district_id,
+            taluka_status: taluka_name,
+            taluka_state: state_id,
+            taluka_status: taluka_status
         })
         return res.json({ message: "Taluka updated successfully!", status: 1 });
     } catch (error) {
