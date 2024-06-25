@@ -16,10 +16,7 @@ const Taluka = sequelize.define('tbl_talukas', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    taluka_state: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
+  
     taluka_status: {
         type: DataTypes.INTEGER,
         allowNull: false,

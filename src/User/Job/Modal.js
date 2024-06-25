@@ -20,10 +20,6 @@ const Job = sequelize.define('tbl_jobs', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    company_logo: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     job_des: {
         type: DataTypes.STRING,
         allowNull: false,

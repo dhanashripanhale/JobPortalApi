@@ -1,7 +1,6 @@
 const { request } = require("express");
 const Job = require("./Modal");
 const sequelize = require("../DB/Db_config");
-const path = require("path");
 
 
 const index = async (req, res) => {
@@ -29,44 +28,15 @@ const index = async (req, res) => {
 
 const store = async (req, res) => {
     try {
-        const { job_name, company_name, job_des, job_experience, job_salary, job_district, job_type, job_jobcategory, job_status } = req.body;
-        let company_logo = null;
-
-        // Check if company_logo file exists in request
-        if (req.files && req.files.company_logo) {
-            company_logo = req.files.company_logo;
-            
-            // Define upload path for company_logo
-            const uploadPath = path.join(process.cwd(), 'public/images/company_logo', company_logo.name);
-
-            // Move file asynchronously to uploadPath
-            await company_logo.mv(uploadPath, (err) => {
-                if (err) {
-                    console.error('Error moving file:', err);
-                    throw new Error('Error moving file.');
-                }
-            });
-        }
-
-        // Create job in database
-        const newJob = await Job.create({
-            job_name,
-            company_name,
-            company_logo: company_logo ? company_logo.name : null,
-            job_des,
-            job_experience,
-            job_salary,
-            job_district,
-            job_type,
-            job_jobcategory,
-            job_status,
+        const { job_name,company_name,job_des,job_experience,job_salary,job_district, job_type,job_jobcategory, job_status } = req.body;
+        //   return console.log(district_name);
+        await Job.create({
+            job_name,company_name,job_des,job_experience,job_salary,job_district,job_type, job_jobcategory, job_status
         });
-
-        return res.status(200).json({ message: 'Job added successfully...', status: 1 });
+        return res.status(200).json({ message: 'Job added successfully...', status: 1 })
 
     } catch (error) {
-        console.error('Error in storing job:', error);
-        return res.status(500).json({ message: 'Failed to store job.', status: 0 });
+        console.log("error....");
     }
 }
 
@@ -89,7 +59,7 @@ const show = async (req, res) => {
 const updated = async (req, res) => {
     // console.log(rejob
     try {
-        const { job_id, job_name,company_name,compnay_logo,job_des,job_experience,job_salary,district_id,job_type,jobcategory_id, job_status } = req.body;
+        const { job_id, job_name,company_name,job_des,job_experience,job_salary,district_id,job_type,jobcategory_id, job_status } = req.body;
         const job = await Job.findByPk(job_id);
 
 
@@ -100,7 +70,6 @@ const updated = async (req, res) => {
         await job.update({
             job_name: job_name,
             company_name:company_name,
-            compnay_logo:compnay_logo,
             job_des:job_des,
             job_experience:job_experience,
             job_salary:job_salary,

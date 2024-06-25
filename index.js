@@ -2,18 +2,20 @@
 const express = require("express");
 const dbchecked = require("./src/DB/Db_config")
 const expressApp = express();
-
+const fileupload = require("express-fileupload")
 
 const cors =require("cors");
 const bodyParser=require("body-parser")
 expressApp.use(cors());
-expressApp.use(bodyParser.json());
 
+expressApp.use(bodyParser.json());
+expressApp.use(fileupload())
 dbchecked.sync({
   // force:true     
   alter:true                         // {alter:true}
-}).catch((error)=>{ });   
-
+}).catch((error)=>{
+  console.log(error);
+ });   
 const state = require("./src/State/Route")
 expressApp.use("/api",state);
 
