@@ -2,6 +2,7 @@ const { request } = require("express");
 const Job = require("./Modal");
 const sequelize = require("../DB/Db_config");
 const path = require("path");
+const fs = require('fs');
 
 
 const index = async (req, res) => {
@@ -87,32 +88,64 @@ const show = async (req, res) => {
 
 
 const updated = async (req, res) => {
-    // console.log(rejob
     try {
-        const { job_id, job_name,company_name,compnay_logo,job_des,job_experience,job_salary,district_id,job_type,jobcategory_id, job_status } = req.body;
+        const { job_id, job_name, company_name, job_des, job_experience, job_salary, district_id, job_type, jobcategory_id, job_status } = req.body;
         const job = await Job.findByPk(job_id);
-
 
         if (!job) {
             return res.status(404).json({ error: "Job not found" });
         }
 
+        let company_logo = job.company_logo;
+
+        // Check if new company_logo file exists in request
+        if (req.files && req.files.company_logo) {
+            const newLogo = req.files.company_logo;
+
+            // Define upload path for new company_logo
+            const uploadPath = path.join(process.cwd(), 'public/images/company_logo', newLogo.name);
+
+            // Delete old company_logo if it exists
+            if (company_logo) {
+                const oldLogoPath = path.join(process.cwd(), 'public/images/company_logo', company_logo);
+                fs.unlink(oldLogoPath, (err) => {
+                    if (err) {
+                        console.error('Error deleting old file:', err);
+                    } else {
+                        console.log('Old file deleted successfully');
+                    }
+                });
+            }
+
+            // Move new file asynchronously to uploadPath
+            await newLogo.mv(uploadPath, (err) => {
+                if (err) {
+                    console.error('Error moving new file:', err);
+                    throw new Error('Error moving new file.');
+                }
+            });
+
+            // Update company_logo to new file name
+            company_logo = newLogo.name;
+        }
+
         await job.update({
             job_name: job_name,
-            company_name:company_name,
-            compnay_logo:compnay_logo,
-            job_des:job_des,
-            job_experience:job_experience,
-            job_salary:job_salary,
-            job_district:district_id,
+            company_name: company_name,
+            company_logo: company_logo,
+            job_des: job_des,
+            job_experience: job_experience,
+            job_salary: job_salary,
+            job_district: district_id,
             job_jobcategory: jobcategory_id,
-            job_type:job_type,
+            job_type: job_type,
             job_status: job_status,
-        })
+        });
+
         return res.json({ message: "Job updated successfully!", status: 1 });
     } catch (error) {
-        console.error("Error updating JOb:", error);
-        res.status(500).json({ error: "Error updating JOb" });
+        console.error("Error updating Job:", error);
+        res.status(500).json({ error: "Error updating Job" });
     }
 }
 

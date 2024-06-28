@@ -34,6 +34,12 @@ expressApp.use("/api",jobcategory);
 const job = require("./src/Job/Route");
 expressApp.use("/api",job);
 
+const user = require("./src/User/Route");
+expressApp.use("/api",user);
+
+const login = require("./src/Login/Route");
+expressApp.use("/api",login);
+
 
 
 expressApp.listen(8080, () => {

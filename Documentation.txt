@@ -1,3 +1,9 @@
+*********JOB PORAL*********
+
+
+
+
+
 *********STATE*********
 
 //Show List Of State
@@ -97,7 +103,7 @@ GET=>
 
 //Store Taluka
 POST=>
-  http://localhost:8080/api/taluka/list
+  http://localhost:8080/api/taluka/store
 {
       "taluka_name": "Pune",
       "taluka_district:"1"
@@ -142,7 +148,7 @@ GET=>
 
 //Store Village
 POST=>
-  http://localhost:8080/api/village/list
+  http://localhost:8080/api/village/store
 {
       "village_name": "Pune",
       "village_taluka:"1"
@@ -174,4 +180,97 @@ PUT=>
 DELETE =>
         http://localhost:8080/api/village/delete/7
 id = village_id
+
+
+
+
+*********JOB CATEGORY*********
+
+//Show List Of Job Category
+GET=>
+http://localhost:8080/api/jobcategory/list
+
+
+//Store Job Category
+POST=>
+ http://localhost:8080/api/jobcategory/store
+{
+        "jobcategory_id": 1,
+        "jobcategory_name": "Health",
+        "jobcategory_status": 1
+       
+    }
+
+
+//Show One Job Category  ( view single data )
+GET=>
+  http://localhost:8080/api/jobcategory/show/16
+
+id = jobcategory_id
+
+
+//Update Job Category
+PUT=>
+ http://localhost:8080/api/jobcategory/update
+{
+    "jobcategory_id": 16,
+    "jobcategory_name": "Health & Care",
+    "jobcategory_status": 1,
+    "createdAt": "2024-06-26T05:40:32.000Z",
+    "updatedAt": "2024-06-26T05:40:32.000Z"
+}
+
+
+//Delete Job Category
+DELETE =>
+       http://localhost:8080/api/jobcategory/delete/17
+id = jobcategory_id
+
+
+
+
+*********JOB *********
+
+//Show List Of Job 
+GET=>
+http://localhost:8080/api/jobcategory/list
+
+
+//Store Job 
+POST=>
+ http://localhost:8080/api/jobcategory/store
+{
+        "jobcategory_id": 1,
+        "jobcategory_name": "Health",
+        "jobcategory_status": 1
+       
+    }
+
+
+//Show One Job   ( view single data )
+GET=>
+  http://localhost:8080/api/jobcategory/show/16
+
+id = jobcategory_id
+
+
+//Update Job 
+PUT=>
+ http://localhost:8080/api/jobcategory/update
+{
+    "jobcategory_id": 16,
+    "jobcategory_name": "Health & Care",
+    "jobcategory_status": 1,
+    "createdAt": "2024-06-26T05:40:32.000Z",
+    "updatedAt": "2024-06-26T05:40:32.000Z"
+}
+
+
+//Delete Job 
+DELETE =>
+       http://localhost:8080/api/jobcategory/delete/17
+id = jobcategory_id
+
+
+
 
